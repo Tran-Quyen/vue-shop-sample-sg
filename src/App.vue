@@ -1,32 +1,43 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <Header></Header>
+
+    <main class="main container py-4">
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
+    </main>
+
+    <Footer></Footer>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+  import Header from '@/components/common/Header';
+  import Footer from '@/components/common/Footer';
 
-#nav {
-  padding: 30px;
-}
+  export default {
+    name: 'App',
+    components: {
+      Header,
+      Footer,
+    },
+  };
+</script>
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+<style lang="scss" scoped>
+@import '@/_variable.scss';
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: 0.5s linear;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  .main{
+    min-height: calc(100vh - #{$header-height} - #{$footer-height});
+  }
 </style>
