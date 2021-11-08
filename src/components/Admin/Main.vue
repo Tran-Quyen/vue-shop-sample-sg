@@ -17,9 +17,9 @@
                 </div>
               </form>
 
-              <a href="#" class="btn btn-sm btn-primary pull-right"
-                ><i class="fa fa-plus-circle"></i> Add New</a
-              >
+              <router-link to="/admin/product/create" class="btn btn-sm btn-primary pull-right">
+                <i class="fa fa-plus-circle"></i> Add New
+              </router-link>
             </div>
           </div>
         </div>
@@ -29,6 +29,7 @@
               <tr>
                 <th>ID</th>
                 <th>Title</th>
+                <th>Image</th>
                 <th>Price</th>
                 <th>Category</th>
                 <th class="text-center">Action</th>
@@ -38,18 +39,31 @@
               <tr v-for="(product, index) in products" :key="product.id">
                 <td>{{ index + 1 }}</td>
                 <td class="col">{{ product.title }}</td>
+                <td><img :src="product.image" :alt="product.title" width="100" height="100" /></td>
                 <td>{{ product.price }}$</td>
                 <td>{{ product.category }}</td>
                 <td>
                   <ul class="action-list">
                     <li>
-                      <a href="#" class="btn btn-sm btn-success" style="border-radius: 5px"><i class="fa fa-search"></i></a>
+                      <a href="#" class="btn btn-success" style="border-radius: 5px"
+                        ><i class="fa fa-search"></i
+                      ></a>
                     </li>
                     <li>
-                      <a href="#" class="btn btn-primary" style="border-radius: 5px"><i class="fa fa-pencil-alt"></i></a>
+                      <router-link
+                        :to="openUpdateFormLink(product.id)"
+                        class="btn btn-primary"
+                        style="border-radius: 5px"
+                        ><i class="fa fa-pencil-alt"></i
+                      ></router-link>
                     </li>
                     <li>
-                      <a href="#" class="btn btn-danger" style="border-radius: 5px"><i class="fa fa-times"></i></a>
+                      <a
+                        @click="deleteProduct(product.id)"
+                        class="btn btn-danger"
+                        style="border-radius: 5px"
+                        ><i class="fa fa-times"></i
+                      ></a>
                     </li>
                   </ul>
                 </td>
@@ -79,8 +93,23 @@
       };
     },
     async created() {
-      this.products = await Product.getProductPaginate(1, 5);
-      console.log(this.products);
+      // getProductPaginate(1, 5);
+      this.products = await Product.getAllProduct();
+    },
+    methods: {
+      openUpdateFormLink(id) {
+        return `/admin/product/${id}/update`;
+      },
+      async deleteProduct(id) {
+        const showModalConfirm = confirm('Are you sure to delete this product?');
+        if (showModalConfirm) {
+          const result = await Product.deleteProduct(id);
+          if (result.status) {
+            this.products = await Product.getAllProduct();
+            alert('Delete successfully!');
+          }
+        }
+      },
     },
   };
 </script>

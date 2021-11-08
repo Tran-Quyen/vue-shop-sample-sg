@@ -21,8 +21,8 @@
       };
     },
     async created() {
+      // await Product.getProductPaginate();
       this.products = await Product.getAllProduct();
-      console.log(this.products);
     },
   };
 </script>

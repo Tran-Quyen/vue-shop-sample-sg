@@ -7,7 +7,6 @@ import 'mutationobserver-shim';
 import './plugins/bootstrap-vue';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-// node_modules\@fortawesome\fontawesome-free\js\brands.js
 import '@fortawesome/fontawesome-free/js/brands.min.js';
 import '@fortawesome/fontawesome-free/js/solid.min.js';
 import '@fortawesome/fontawesome-free/js/fontawesome.min.js';

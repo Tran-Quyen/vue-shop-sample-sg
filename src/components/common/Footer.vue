@@ -11,7 +11,7 @@
 </script>
 
 <style lang="scss" >
-@import '@/_variable.scss';
+// @import '@/_variable.scss';
   .footer {
     background-color: #000;
     font-size: 18px;

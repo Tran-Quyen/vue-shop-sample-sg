@@ -32,6 +32,16 @@ const routes = [
     component: () => import('@/views/Admin/Admin.vue'),
     children: [
       { path: '/', name: 'AdminMain', component: () => import('@/components/Admin/Main.vue') },
+      {
+        path: 'product/create',
+        name: 'AdminCreateProduct',
+        component: () => import('@/components/Admin/CreateProduct.vue'),
+      },
+      {
+        path: 'product/:id/update',
+        name: 'AdminCreateProduct',
+        component: () => import('@/components/Admin/UpdateProduct.vue'),
+      },
     ],
   },
   { path: '*', component: () => import('@/views/404/PageNotFound.vue') },

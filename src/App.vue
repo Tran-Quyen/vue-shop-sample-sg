@@ -26,7 +26,6 @@
 </script>
 
 <style lang="scss" scoped>
-@import '@/_variable.scss';
   .fade-enter-active,
   .fade-leave-active {
     transition: 0.5s linear;
