@@ -4,7 +4,7 @@
     <nav class="main-menu">
       <ul>
         <li>
-          <a href="http://justinfarrow.com">
+          <a href="/admin">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text"> Product List </span>
           </a>
@@ -65,7 +65,6 @@
 </script>
 
 <style lang="scss">
-  @import '@/_variable.scss';
   @import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
   @import url('https://fonts.googleapis.com/css?family=Titillium+Web:300');
   .main-menu {

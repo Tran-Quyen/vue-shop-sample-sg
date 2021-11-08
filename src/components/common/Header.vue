@@ -89,7 +89,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/_variable.scss';
+  // @import '@/_variable.scss';
   @mixin icon-div {
     display: flex;
     align-items: center;
