@@ -44,6 +44,22 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/sign-in',
+    name: 'SignIn', 
+    component: () => import('@/views/Auth/SignIn.vue'),
+    meta: {
+      title: `Sign In | ${DEFAULT_TITLE}`,
+    },
+  },
+  {
+    path: '/sign-up',
+    name: 'SignUp', 
+    component: () => import('@/views/Auth/SignUp.vue'),
+    meta: {
+      title: `Sign Up | ${DEFAULT_TITLE}`,
+    },
+  },
   { path: '*', component: () => import('@/views/404/PageNotFound.vue') },
 ];
 
