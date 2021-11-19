@@ -1,7 +1,10 @@
 <template>
   <header id="header">
     <!-- Client -->
-    <nav v-if="checkHeaderPage" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav
+      v-if="checkHeaderPage"
+      class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+    >
       <router-link class="navbar-brand" to="/">
         <img :src="require('@/assets/logo.png')" class="logo" alt="" />
       </router-link>
@@ -19,8 +22,14 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item text-uppercase" v-for="(route, index) in routeList" :key="index">
-            <router-link class="nav-link" :to="route.link">{{ route.name }}</router-link>
+          <li
+            class="nav-item text-uppercase"
+            v-for="(route, index) in routeList"
+            :key="index"
+          >
+            <router-link class="nav-link" :to="route.link">{{
+              route.name
+            }}</router-link>
           </li>
         </ul>
 
@@ -30,12 +39,21 @@
         </div>
 
         <div class="account">
-          <div>
+          <div v-show="!auth.user.isSignin"> <!--flase-->
             <a class="btn btn-md text-white" href="/sign-in">Đăng Nhập</a>
             <a class="btn btn-md text-white" href="/sign-up">Đăng Ký</a>
           </div>
 
-          <div v-show="false"><i class="fas fa-user-circle"></i></div>
+          <div v-show="auth.user.isSignin" @click="toggleLogout">
+            <i class="fas fa-user-circle" ></i>
+            <!-- css logout -->
+            <ul v-if ="!checkClickLogo" style = "display: none">
+              <li>Logg</li>
+            </ul>
+             <ul v-else style = "display: block">
+              <li @click="logout">Logout</li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
@@ -70,72 +88,86 @@
 </template>
 
 <script>
-  export default {
-    name: 'Header',
-    data() {
-      return {
-        checkHeaderPage: true,
-        routeList: [
-          { name: 'Home', link: '/' },
-          { name: 'About', link: '/about' },
-          { name: 'Contact', link: '/contact' },
-        ],
-      };
+import { mapState } from "vuex";
+export default {
+  name: "Header",
+  data() {
+    return {
+      checkClickLogo: false,
+      checkHeaderPage: true,
+      routeList: [
+        { name: "Home", link: "/" },
+        { name: "About", link: "/about" },
+        { name: "Contact", link: "/contact" },
+      ],
+    };
+  },
+  computed: mapState(["auth"]),
+  created() {
+    this.checkHeaderPage = !window.location.href.includes("admin");
+    console.log(this.auth.user);
+  },
+  methods: {
+    toggleLogout(){
+      this.checkClickLogo = !this.checkClickLogo;
     },
-    created() {
-      this.checkHeaderPage = !window.location.href.includes('admin');
-    },
-  };
+    logout(){
+      this.auth.user.isSignin = !this.auth.user.isSignin;
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  // @import '@/_variable.scss';
-  @mixin icon-div {
-    display: flex;
-    align-items: center;
-    margin: 0 15px;
-    font-size: 18px;
-    color: #fff;
-    position: relative;
-    cursor: pointer;
+// @import '@/_variable.scss';
+@mixin icon-div {
+  display: flex;
+  align-items: center;
+  margin: 0 15px;
+  font-size: 18px;
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+}
+li{
+  list-style-type: none;
+}
+#header {
+  height: $header-height;
+  .logo {
+    width: 30px;
   }
 
-  #header {
-    height: $header-height;
-    .logo {
-      width: 30px;
-    }
+  .account {
+    @include icon-div;
 
-    .account {
-      @include icon-div;
+    a {
+      transition: opacity 0.25s ease-in;
+      will-change: opacity;
 
-      a {
-        transition: opacity 0.25s ease-in;
-        will-change: opacity;
-
-        &:hover {
-          opacity: 0.7;
-        }
-      }
-    }
-    .cart {
-      @include icon-div;
-
-      .count-item {
-        $size: 25px;
-        $position-base: 15px;
-        position: absolute;
-        display: block;
-        top: -$position-base;
-        right: -$position-base;
-        color: #fff;
-        text-align: center;
-        background-color: #0984e3;
-        width: $size;
-        height: $size;
-        line-height: $size;
-        border-radius: 50%;
+      &:hover {
+        opacity: 0.7;
       }
     }
   }
+  .cart {
+    @include icon-div;
+
+    .count-item {
+      $size: 25px;
+      $position-base: 15px;
+      position: absolute;
+      display: block;
+      top: -$position-base;
+      right: -$position-base;
+      color: #fff;
+      text-align: center;
+      background-color: #0984e3;
+      width: $size;
+      height: $size;
+      line-height: $size;
+      border-radius: 50%;
+    }
+  }
+}
 </style>

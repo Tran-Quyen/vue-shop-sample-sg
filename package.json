@@ -41,6 +41,7 @@
     "sass": "^1.43.3",
     "sass-loader": "^10.2.0",
     "vue-cli-plugin-bootstrap": "~0.4.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuelidate": "^0.7.6"
   }
 }
