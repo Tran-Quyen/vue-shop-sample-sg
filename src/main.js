@@ -10,6 +10,9 @@ import 'aos/dist/aos.css';
 import '@fortawesome/fontawesome-free/js/brands.min.js';
 import '@fortawesome/fontawesome-free/js/solid.min.js';
 import '@fortawesome/fontawesome-free/js/fontawesome.min.js';
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
+
 
 Vue.config.productionTip = false;
 

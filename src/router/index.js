@@ -28,10 +28,9 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'Admin',
     component: () => import('@/views/Admin/Admin.vue'),
     children: [
-      { path: '/', name: 'AdminMain', component: () => import('@/components/Admin/Main.vue') },
+      { path: '/', name: 'Admin', component: () => import('@/components/Admin/Main.vue') },
       {
         path: 'product/create',
         name: 'AdminCreateProduct',
@@ -39,7 +38,7 @@ const routes = [
       },
       {
         path: 'product/:id/update',
-        name: 'AdminCreateProduct',
+        name: 'AdminUpdateProduct',
         component: () => import('@/components/Admin/UpdateProduct.vue'),
       },
     ],
